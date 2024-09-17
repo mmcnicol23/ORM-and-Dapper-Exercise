@@ -14,13 +14,32 @@ var config = new ConfigurationBuilder()
 string connString = config.GetConnectionString("DefaultConnection");
 IDbConnection conn = new MySqlConnection(connString);
 
-var departmentRepo = new DepartmentRepository(conn);
+//Department Section:
+// var departmentRepo = new DepartmentRepository(conn);
+//
+// departmentRepo.InsertDepartment("CSharp-50");
+//
+// var departments = departmentRepo.GetAllFromDepartments();
+//
+// foreach (var dep in departments)
+// {
+//     Console.WriteLine($"Name: {dep.Name} | ID: {dep.DepartmentID}");
+// }
 
-departmentRepo.InsertDepartment("CSharp-50");
+//Product Section:
+var productRepository = new DapperProductRepository(conn);
 
-var departments = departmentRepo.GetAllFromDepartments();
-
-foreach (var dep in departments)
+productRepository.GetAllProducts();
+var products = productRepository.GetAllProducts();
+foreach (var product in products)
 {
-    Console.WriteLine($"Name: {dep.Name} | ID: {dep.DepartmentID}");
+    Console.WriteLine(product.ProductID);
+    Console.WriteLine(product.Name);
+    Console.WriteLine(product.Price);
+    Console.WriteLine(product.CategoryID);
+    Console.WriteLine(product.OnSale);
+    Console.WriteLine(product.StockLevel);
+    Console.WriteLine();
+    Console.WriteLine();
+    
 }
